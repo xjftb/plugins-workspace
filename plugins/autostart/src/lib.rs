@@ -112,6 +112,8 @@ pub fn init<R: Runtime>(
             builder.set_app_path(&current_exe.display().to_string());
             #[cfg(target_os = "macos")]
             {
+                let exe_path = current_exe.canonicalize()?.display().to_string();
+                
                 match macos_launcher {
                     MacosLauncher::AppleScript => {
                         // current_exe gives path to /Applications/Example.app/MacOS/Example
